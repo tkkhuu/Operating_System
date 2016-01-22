@@ -19,7 +19,7 @@ int main(int argc, char* argv[]){
 	}
 
 	execute_cmd[argc - 1] = NULL;
-
+	printf("execute_command[1] : %s\n", execute_cmd[0]);
 	// Fork a child process
 	pid_t child_process = fork();
 	
