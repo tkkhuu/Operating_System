@@ -47,7 +47,31 @@ int main(int argc, char* argv[]){
 		}
 
 		if (child_process == 0){ // In the Child process
-			if(execvp(shell_input[0], shell_input) < 0){
+			// If the built in command chdir() "cd" is called
+			if (strcmp(shell_input[0], "cd") == 0){
+				if(input_counts > 3){
+					perror("cd error: Too many arguments\n");
+				}
+				else{
+					int cd_statu = chdir(shell_input[1]);
+					if (cd_statu < 0){
+						perror("cd failed\n");
+					}
+				}
+			}
+
+			// If the built in command exit is called
+			else if(strcmp(shell_input[0], "exit") == 0){
+				if (input_counts > 2){
+					perror("exit error: Too many arguments\n");
+				}
+				else{
+					exit(0);
+				}
+			}
+			
+			// If the other Linux commands are called
+			else if(execvp(shell_input[0], shell_input) < 0){
 				perror("Exec failed: invalid command or arguments\n");
 			} 
 		}
