@@ -4,11 +4,17 @@
 void delete_node(pid_node* head, pid_node* node){
 
 	if(head == node){
-		head->process_id = head->next->process_id;
-		pid_node* temp = head->next;
-		head->next = head->next->next;
-		free(temp);
-		return;
+		if(head->next == NULL){
+			head->is_done = -1;
+			head->process_id = -1;
+		}
+		if(head->next != NULL){			
+			head->process_id = head->next->process_id;
+			pid_node* temp = head->next;
+			head->next = head->next->next;
+			free(temp);
+			return;
+		}
 	}
 
 	pid_node* cur_node = head;
@@ -100,7 +106,7 @@ void print_all_background_process(pid_node* head){
 	pid_node* temp = head;
 
 	while(temp != NULL){
-		if(temp->is_done == 1){
+		if(temp->is_done == 1 && temp->process_id != -1){
 			printf("[Process ID: %ld]\n", (long)temp->process_id);
 			//print_process_statistic(*(temp->process_rusage));
 			delete_node(head, temp);

@@ -13,7 +13,7 @@ struct pid_linked_list {
 	
 	struct pid_linked_list* next;
 
-	unsigned char is_done;
+	char is_done;
 
 	struct rusage* process_rusage;
 };
