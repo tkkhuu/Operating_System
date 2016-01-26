@@ -41,7 +41,8 @@ void read_stdin(){
 		char* shell_input[32];
 		char* token;
 		char* delim = " \n";
-
+		char usr_input[128];
+		strcpy(usr_input, user_input);
 		token = strtok(user_input, delim);
 
 		int input_counts = 0;
@@ -99,19 +100,24 @@ void read_stdin(){
 			if (child_process != 0){ // In the Parent process
 
 				if (is_background){
-					int fork_status;
-					struct rusage child_rusage;
-					add_node(&lon, child_process, &child_rusage);
+					int background_fork_status;
+					struct rusage background_child_rusage;
+					//char* usr_input = user_input;
+					add_node(&lon, child_process);//, background_child_rusage, user_input);
+					pid_node* cur_node = lon;
+					strcpy(cur_node->input_cmd, usr_input);
 					int non = count_node(lon);
 					printf("Number of background process executed: %d\n", non);
 
-					wait4(child_process, &fork_status, WNOHANG, &child_rusage);
-					mark_process_done(&lon, child_process);
+					wait4(child_process, &background_fork_status, WNOHANG, &background_child_rusage);
+					//cur_node -> input_cmd = usr_input;
+					mark_process_done(&cur_node, child_process, background_child_rusage, usr_input);
 				}
 				else {
 					int fork_status;
 					struct rusage child_rusage;
 					wait4(child_process, &fork_status, 0, &child_rusage);
+					printf("************ Current command with ID %ld and input '%s' ************\n", (long)child_process, user_input);
 					print_process_statistic(child_rusage);
 					print_all_background_process(lon);
 				}
@@ -131,18 +137,4 @@ void read_stdin(){
 		}
 	}
 }
-/**
-void print_process_statistic(struct rusage process_rusage){
-	double user_time_sec = process_rusage.ru_utime.tv_sec;
-	double user_time_usec = process_rusage.ru_utime.tv_usec;
-	double sys_time_sec = process_rusage.ru_stime.tv_sec;
-	double sys_time_usec = process_rusage.ru_stime.tv_usec;
 
-	printf("[The amount of user CPU time used: %f miliseconds]\n", user_time_sec*1000.0 + user_time_usec/1000.0);
-	printf("[The amount of system CPU time used: %f miliseconds]\n", sys_time_sec*1000.0 + sys_time_usec/1000.0);
-	printf("[The number of times the process gave up the CPU voluntarily: %ld]\n", process_rusage.ru_nvcsw);
-	printf("[The number of times the process was preempted involuntarily: %ld]\n", process_rusage.ru_nivcsw);
-	printf("[The number of hard page faults: %ld]\n", process_rusage.ru_majflt);
-	printf("[The number of soft page faults: %ld]\n", process_rusage.ru_minflt);
-
-}*/

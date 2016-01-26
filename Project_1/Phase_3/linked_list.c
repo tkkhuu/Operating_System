@@ -10,6 +10,9 @@ void delete_node(pid_node* head, pid_node* node){
 		}
 		if(head->next != NULL){			
 			head->process_id = head->next->process_id;
+			head->is_done = head->next->is_done;
+			head->process_rusage = head->next->process_rusage;
+			head->input_cmd = head->next->input_cmd;
 			pid_node* temp = head->next;
 			head->next = head->next->next;
 			free(temp);
@@ -34,7 +37,7 @@ void delete_node(pid_node* head, pid_node* node){
 
 }
 
-void add_node(pid_node** head, pid_t new_value, struct rusage* usage){
+void add_node(pid_node** head, pid_t new_value){//, struct rusage usage, char* cmd){
 
 	// Create a node from the new value
 	pid_node* new_node = (pid_node*)malloc(sizeof(pid_node));
@@ -42,7 +45,9 @@ void add_node(pid_node** head, pid_t new_value, struct rusage* usage){
 	// Update the value of the new node 
 	new_node->process_id = new_value;
 
-	new_node->process_rusage = usage;
+	//new_node->process_rusage = usage;
+
+	new_node->input_cmd = (char*)malloc(128 * sizeof(char));
 
 	// Make new node next's element to be the current head
 	new_node->next = *head;
@@ -69,7 +74,7 @@ int count_node(pid_node* head){
 	}
 }
 
-void mark_process_done(pid_node** head, pid_t value){
+void mark_process_done(pid_node** head, pid_t value, struct rusage p_rusage, char* cmd){
 
 	if(head == NULL){
 		printf("Error marking process: The given list is empty");
@@ -77,6 +82,8 @@ void mark_process_done(pid_node** head, pid_t value){
 
 	if((*head)->process_id == value){
 		(*head)->is_done = 1;
+		(*head)->process_rusage = p_rusage;
+		(*head)->input_cmd = cmd;
 		return;
 	}
 
@@ -87,6 +94,8 @@ void mark_process_done(pid_node** head, pid_t value){
 		while(temp != NULL){
 			if(temp->process_id = value){
 				temp->is_done = 1;
+				temp->process_rusage = p_rusage;
+				strcpy(temp->input_cmd, cmd);
 				return;
 			}
 			else {
@@ -107,8 +116,8 @@ void print_all_background_process(pid_node* head){
 
 	while(temp != NULL){
 		if(temp->is_done == 1 && temp->process_id != -1){
-			printf("[Process ID: %ld]\n", (long)temp->process_id);
-			//print_process_statistic(*(temp->process_rusage));
+			printf("[============ Background Process with ID %ld and command '%s' terminated ============]\n", (long)temp->process_id, temp->input_cmd);
+			print_process_statistic(temp->process_rusage);
 			delete_node(head, temp);
 		}
 		//printf("Process %d is done? %d\n", (int)temp->process_id, temp->is_done);
