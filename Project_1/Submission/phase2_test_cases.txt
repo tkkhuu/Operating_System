@@ -1,0 +1,229 @@
+// =============================== Open the shell and start using as a normal shell ===============================
+
+$ ./shell
+==> ls
+linked_list.c  linked_list.o  phase1_test_cases.txt   runCommand    runCommand.o  shell2    shell2.o  shell.o
+linked_list.h  Makefile       phase1_test_cases.txt~  runCommand.c  shell	  shell2.c  shell.c
+User input: ls
+[Wall-clock time of the command]: 0.000820000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 259]
+==> pwd 
+/home/tkkhuu/Desktop/Project_1
+User input: pwd
+[Wall-clock time of the command]: 0.000789000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 181]
+==> cp -r /home/tkkhuu/Documents /home/tkkhuu/Desktop/Temp_Documents
+User input: cp -r /home/tkkhuu/Documents /home/tkkhuu/Desktop/Temp_Documents
+[Wall-clock time of the command]: 0.086567000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 16.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 178]
+[The number of times the process was preempted involuntarily: 1]
+[The number of hard page faults: 0]
+[The number of soft page faults: 275]
+==> exit
+Exit shell
+$
+
+// =============================== Test using cd ===============================
+
+$./shell
+==> pwd
+/home/tkkhuu/Desktop/Project_1
+User input: pwd
+[Wall-clock time of the command]: 0.000720000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 181]
+==> cd ..
+User input: cd ..
+[Wall-clock time of the command]: 0.000023000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 3]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 199]
+==> pwd
+/home/tkkhuu/Desktop
+User input: pwd
+[Wall-clock time of the command]: 0.000684000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 181]
+==> cd /home/tkhuuu/Documents
+shell: cd error: : No such file or directory
+User input: cd /home/tkhuuu/Documents
+[Wall-clock time of the command]: 0.000139000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 6]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 231]
+==> cd /home/tkkhuu/Documents
+User input: cd /home/tkkhuu/Documents
+[Wall-clock time of the command]: 0.000008000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 7]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 231]
+==> pwd
+/home/tkkhuu/Documents
+User input: pwd
+[Wall-clock time of the command]: 0.000431000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 183]
+==> exit
+Exit shell
+$
+
+// =============================== Passing in invalid commands ===============================
+
+&./shell
+==> lkp
+Exec failed: invalid command or arguments: No such file or directory
+User input: lkp
+[Wall-clock time of the command]: 0.000479000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 94]
+==> ls
+linked_list.c  Makefile		       phase2_test_cases.txt   runCommand.c  shell2    shell.c
+linked_list.h  phase1_test_cases.txt   phase2_test_cases.txt~  runCommand.o  shell2.c  shell.o
+linked_list.o  phase1_test_cases.txt~  runCommand	       shell	     shell2.o
+User input: ls
+[Wall-clock time of the command]: 0.001480000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 13]
+[The number of hard page faults: 0]
+[The number of soft page faults: 259]
+==> kjh
+Exec failed: invalid command or arguments: No such file or directory
+User input: kjh
+[Wall-clock time of the command]: 0.000368000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 94]
+==> pwd
+/home/tkkhuu/Desktop/Project_1
+User input: pwd
+[Wall-clock time of the command]: 0.000630000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 182]
+==> exit
+Exit shell
+$
+
+// =============================== Passing in a file ===============================
+
+test_file.txt contents:
+ls
+cd ..
+pwd
+ls
+mkdir test_folder
+ls
+cp -r /home/ temp_home
+
+$ ./shell < test_file.txt 
+linked_list.c  linked_list.o  phase1_test_cases.txt  runCommand    runCommand.o  shell2    shell2.o  shell.o
+linked_list.h  Makefile       phase2_test_cases.txt  runCommand.c  shell	 shell2.c  shell.c   test_file.txt
+==> User input: ls
+[Wall-clock time of the command]: 0.001032000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 260]
+==> User input: cd ..
+[Wall-clock time of the command]: 0.000008000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 17]
+[The number of hard page faults: 0]
+[The number of soft page faults: 249]
+/home/tkkhuu/Desktop
+==> User input: pwd
+[Wall-clock time of the command]: 0.000580000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 2]
+[The number of hard page faults: 0]
+[The number of soft page faults: 181]
+Project_1
+==> User input: ls
+[Wall-clock time of the command]: 0.001137000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 2]
+[The number of hard page faults: 0]
+[The number of soft page faults: 255]
+==> User input: mkdir test_folder
+[Wall-clock time of the command]: 0.000954000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 2]
+[The number of hard page faults: 0]
+[The number of soft page faults: 217]
+Project_1  test_folder
+==> User input: ls
+[Wall-clock time of the command]: 0.000936000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 2]
+[The number of hard page faults: 0]
+[The number of soft page faults: 258]
+cp: cannot open ‘/home/tkkhuu/.rnd’ for reading: Permission denied
+cp: cannot copy a directory, ‘/home/’, into itself, ‘temp_home’
+==> User input: cp -r /home/ temp_home
+[Wall-clock time of the command]: 0.002034000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 8]
+[The number of hard page faults: 0]
+[The number of soft page faults: 291]
+$
+
+

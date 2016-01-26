@@ -1,0 +1,7 @@
+ls
+cd ..
+pwd
+ls
+mkdir test_folder
+ls
+cp -r /home/ temp_home

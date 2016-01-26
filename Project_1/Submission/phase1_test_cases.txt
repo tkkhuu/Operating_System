@@ -1,0 +1,80 @@
+// ================================== Passing in a null command ==================================
+
+$ ./runCommand 
+User input: 
+[Wall-clock time of the command]: 0.144422000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 3]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 27]
+$ 
+
+// ================================== Passing in a simple command ==================================
+
+$ ./runCommand ls
+linked_list.c  Makefile      runCommand.o  shell2.c  shell.o
+linked_list.h  runCommand    shell	   shell2.o
+linked_list.o  runCommand.c  shell2	   shell.c
+User input: ls 
+[Wall-clock time of the command]: 0.001336000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 10]
+[The number of hard page faults: 0]
+[The number of soft page faults: 259]
+$
+
+$ ./runCommand pwd
+/home/tkkhuu/Desktop/Project_1
+User input: pwd 
+[Wall-clock time of the command]: 0.000636000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 183]
+$
+
+// ================================== Passing in a more complicated command ==================================
+
+$ ./runCommand ls ~/Documents/CS3013/Operating_System/
+Project_0  Project_1  Project_1.zip  README.md
+User input: ls /home/tkkhuu/Documents/CS3013/Operating_System/ 
+[Wall-clock time of the command]: 0.001032000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 0]
+[The number of hard page faults: 0]
+[The number of soft page faults: 259]
+$
+
+$./runCommand cp -r ~/Documents/CS3013/Operating_System/Project_0 ~/Desktop/
+User input: cp -r /home/tkkhuu/Documents/CS3013/Operating_System/Project_0 /home/tkkhuu/Desktop/ 
+[Wall-clock time of the command]: 0.018823000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 24]
+[The number of times the process was preempted involuntarily: 3]
+[The number of hard page faults: 0]
+[The number of soft page faults: 273]
+$
+
+// ================================== Passing in invalid commands ==================================
+
+$ ./runCommand lsd
+Exec failed: invalid command or arguments: No such file or directory
+User input: lsd 
+[Wall-clock time of the command]: 0.000242000 seconds
+[The amount of user CPU time used: 0.000000000 miliseconds]
+[The amount of system CPU time used: 0.000000000 miliseconds]
+[The number of times the process gave up the CPU voluntarily: 1]
+[The number of times the process was preempted involuntarily: 2]
+[The number of hard page faults: 0]
+[The number of soft page faults: 94]
+
+
