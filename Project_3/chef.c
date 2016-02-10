@@ -65,9 +65,9 @@ int current_order = 0;
 
 typedef struct semaphore semaphore;
 
-semaphore kitchen[4]; /* Control access over {Prep Area, Stove Top, Oven, Sink}. */
+semaphore kitchen = malloc(4 * sizeof(*kitchen)); /* Control access over {Prep Area, Stove Top, Oven, Sink}. */
 
-semaphore recipe_mutex[5];
+semaphore recipe_mutex = malloc(5 * sizeof(*recipe_mutex));
 
 sema_init(&kitchen[0], 1);
 sema_init(&kitchen[1], 1);
