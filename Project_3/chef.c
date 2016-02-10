@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-//#include <kernel/semaphore.h>
+#include <semaphore.h>
 #include <sys/time.h>
 #include <time.h>
 
