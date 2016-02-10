@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-//#include <kernel/semaphore.h>
+#include <semaphore.h>
 #include <sys/time.h>
 #include <time.h>
 
@@ -63,13 +63,25 @@ void perform_step (recipe *current_recipe);
 
 int current_order = 0;
 
-typedef int semaphore;
+typedef struct semaphore semaphore;
 
-semaphore kitchen[4] = { 1, 1, 1, 1 }; /* Control access over {Prep Area, Stove Top, Oven, Sink}. */
+semaphore kitchen[4]; /* Control access over {Prep Area, Stove Top, Oven, Sink}. */
 
-semaphore recipe_mutex[5] = { 1, 1, 1, 1, 1 }; /* Control access over recipe. */
+semaphore recipe_mutex[5];
 
-semaphore lor_mutex = 1;
+sema_init(&kitchen[0], 1);
+sema_init(&kitchen[1], 1);
+sema_init(&kitchen[2], 1);
+sema_init(&kitchen[3], 1);
+
+sema_init(&recipe_mutex[0], 1);
+sema_init(&recipe_mutex[1], 1);
+sema_init(&recipe_mutex[2], 1);
+sema_init(&recipe_mutex[3], 1);
+sema_init(&recipe_mutex[4], 1);
+
+semaphore lor_mutex;
+sema_init(&lor_mutex[4], 1);
 
 recipe orders[N];
 
