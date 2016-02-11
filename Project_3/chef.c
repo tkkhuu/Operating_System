@@ -26,7 +26,7 @@ struct kitchen_step_struct {
 	/** An action in the kitchen: PREP, STOVE, OVEN, SINK. */
 	int action;
 
-	/** The time taken for this step in miliseconds. */
+	/** The time taken for this step in seconds. */
 	int time_period;
 
 };
@@ -45,29 +45,28 @@ struct recipe_struct {
 	kitchen_step *steps;
 
 	/** A cursor to next action to be performed in the array. */
-	unsigned short next_action;
+	unsigned int next_action;
 
 	/** A boolean to determine whether this recipe is finished, 0 means unfinished and 1 means finished. */
 	unsigned short is_done;
 
 	/** The number of steps in this recipe, which is the size of steps[]. */
-	unsigned short num_action;
+	unsigned int num_action;
 
 };
 
 typedef struct recipe_struct recipe;
 
-void chef(recipe *current_recipe);
-void leave_station(recipe *current_recipe);
-void perform_step (recipe *current_recipe);
+void chef(int *chef_id);
+void enter_station(int *chef_id, recipe *current_recipe);
+void leave_station(int *chef_id, recipe *current_recipe);
+void perform_step (int *chef_id, recipe *current_recipe);
 
 int current_order = 0;
 
-//struct semaphore *kitchen;
+sem_t kitchen[4];
 
-sem_t *kitchen[4];// = malloc(4 * sizeof(*kitchen)); /* Control access over {Prep Area, Stove Top, Oven, Sink}. */
-
-sem_t *recipe_mutex[5];// = malloc(5 * sizeof(*recipe_mutex));
+sem_t recipe_mutex[5];
 
 
 
@@ -79,7 +78,7 @@ recipe orders[N];
 /**
  * Function to generate a recipe.
  */
-recipe generate_recipe(unsigned short rep_num){
+recipe generate_recipe(unsigned int rep_num){
 
 	recipe my_recipe;
 
@@ -96,22 +95,22 @@ recipe generate_recipe(unsigned short rep_num){
 			my_recipe.steps = malloc(my_recipe.num_action * sizeof(*my_recipe.steps));
 
 			my_recipe.steps[0].action = PREP;
-			my_recipe.steps[0].time_period = 3000;
+			my_recipe.steps[0].time_period = 3;
 
 			my_recipe.steps[1].action = STOVE;
-			my_recipe.steps[1].time_period = 4000;
+			my_recipe.steps[1].time_period = 4;
 
 			my_recipe.steps[2].action = SINK;
-			my_recipe.steps[2].time_period = 2000;
+			my_recipe.steps[2].time_period = 2;
 
 			my_recipe.steps[3].action = PREP;
-			my_recipe.steps[3].time_period = 2000;
+			my_recipe.steps[3].time_period = 2;
 
 			my_recipe.steps[4].action = OVEN;
-			my_recipe.steps[4].time_period = 5000;
+			my_recipe.steps[4].time_period = 5;
 
 			my_recipe.steps[5].action = SINK;
-			my_recipe.steps[5].time_period = 10000;
+			my_recipe.steps[5].time_period = 10;
 
 			break;
 
@@ -122,13 +121,13 @@ recipe generate_recipe(unsigned short rep_num){
 			my_recipe.steps = malloc(my_recipe.num_action * sizeof(*my_recipe.steps));
 
 			my_recipe.steps[0].action = PREP;
-			my_recipe.steps[0].time_period = 5000;
+			my_recipe.steps[0].time_period = 5;
 
 			my_recipe.steps[1].action = STOVE;
-			my_recipe.steps[1].time_period = 3000;
+			my_recipe.steps[1].time_period = 3;
 
 			my_recipe.steps[2].action = SINK;
-			my_recipe.steps[2].time_period = 15000;
+			my_recipe.steps[2].time_period = 15;
 
 			break;
 
@@ -139,13 +138,13 @@ recipe generate_recipe(unsigned short rep_num){
 			my_recipe.steps = malloc(my_recipe.num_action * sizeof(*my_recipe.steps));
 
 			my_recipe.steps[0].action = PREP;
-			my_recipe.steps[0].time_period = 10000;
+			my_recipe.steps[0].time_period = 10;
 
 			my_recipe.steps[1].action = OVEN;
-			my_recipe.steps[1].time_period = 5000;
+			my_recipe.steps[1].time_period = 5;
 
 			my_recipe.steps[2].action = SINK;
-			my_recipe.steps[2].time_period = 5000;
+			my_recipe.steps[2].time_period = 5;
 
 			break;
 
@@ -156,13 +155,13 @@ recipe generate_recipe(unsigned short rep_num){
 			my_recipe.steps = malloc(my_recipe.num_action * sizeof(*my_recipe.steps));
 
 			my_recipe.steps[0].action = OVEN;
-			my_recipe.steps[0].time_period = 15000;
+			my_recipe.steps[0].time_period = 15;
 
 			my_recipe.steps[1].action = PREP;
-			my_recipe.steps[1].time_period = 5000;
+			my_recipe.steps[1].time_period = 5;
 
 			my_recipe.steps[2].action = SINK;
-			my_recipe.steps[2].time_period = 4000;
+			my_recipe.steps[2].time_period = 4;
 
 			break;
 
@@ -173,22 +172,22 @@ recipe generate_recipe(unsigned short rep_num){
 			my_recipe.steps = malloc(my_recipe.num_action * sizeof(*my_recipe.steps));
 
 			my_recipe.steps[0].action = PREP;
-			my_recipe.steps[0].time_period = 2000;
+			my_recipe.steps[0].time_period = 2;
 
 			my_recipe.steps[1].action = OVEN;
-			my_recipe.steps[1].time_period = 3000;
+			my_recipe.steps[1].time_period = 3;
 
 			my_recipe.steps[2].action = SINK;
-			my_recipe.steps[2].time_period = 2000;
+			my_recipe.steps[2].time_period = 2;
 
 			my_recipe.steps[3].action = PREP;
-			my_recipe.steps[3].time_period = 2000;
+			my_recipe.steps[3].time_period = 2;
 
 			my_recipe.steps[4].action = OVEN;
-			my_recipe.steps[4].time_period = 3000;
+			my_recipe.steps[4].time_period = 3;
 
 			my_recipe.steps[5].action = SINK;
-			my_recipe.steps[5].time_period = 4000;
+			my_recipe.steps[5].time_period = 4;
 
 			break;
 	}
@@ -201,13 +200,11 @@ recipe generate_recipe(unsigned short rep_num){
  */
 recipe *next_order(){
 
-	recipe *next_order;
+	recipe *next_order = &(orders[current_order]);
 
 	if (next_order->is_done == 1) {
 		next_order = NULL;
-	} else {
-		next_order = &(orders[current_order]);
-	}
+	} 
 
 	current_order++;
 
@@ -227,20 +224,24 @@ recipe oders[N];
 /**
  * Function to enter the stations, which is the critical regions.
  */
-void enter_station(recipe *current_recipe){
+void enter_station(int *chef_id, recipe *current_recipe){
 
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action; // Next step to be performed: will either be PREP, STOVE, OVEN or SINK
 
-	sem_wait(kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep
+	printf("Chef %d is waiting to enter station %d\n", *chef_id, step_to_perform);	
+	
+	sem_wait(&kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep
 
 }
 
 /**
  * Function to leave the critical region
  */
-void leave_station(recipe *current_recipe){
+void leave_station(int *chef_id, recipe *current_recipe){
 
 	int step_finished = current_recipe->steps[current_recipe->next_action].action; // Get the step that the chef just finished
+
+	printf("Chef %d is leaving station %d\n", *chef_id, step_finished);
 
 	// Move to next step on the recipe steps, if no more step, mark the recipe as finished.
 	if (current_recipe->next_action == current_recipe->num_action) {
@@ -250,14 +251,16 @@ void leave_station(recipe *current_recipe){
 	}
 
 	// Release the semaphore for the station.
-	sem_post(kitchen[step_finished]);
+	sem_post(&kitchen[step_finished]);
+
+	printf("Chef %d left station %d\n", *chef_id, step_finished);
 }
 
 /**
  * Function to perform the step
  * Takes in a recipe
  */
-void perform_step (recipe *current_recipe) {
+void perform_step (int *chef_id, recipe *current_recipe) {
 
 	int time_taken = current_recipe->steps[current_recipe->next_action].time_period;
 
@@ -266,6 +269,8 @@ void perform_step (recipe *current_recipe) {
 	int time_elapsed = 0;
 
 	gettimeofday(&start, NULL);
+
+	printf("Chef %d is working in station %d\n", *chef_id, current_recipe->steps[current_recipe->next_action].action);
 
 	while ( time_elapsed < time_taken) {
 
@@ -277,15 +282,23 @@ void perform_step (recipe *current_recipe) {
 
 }
 
+char *get_station_name(int station_id){
+	
+}
+
 /**
  * The main thread chef, takes in the number to identify that chef and a pointer to the recipe that the chef will work on.
  */
-void chef(recipe *current_recipe){
+void chef(int *chef_id){
+
+	recipe *current_recipe = NULL;
 
 	while (TRUE) {
 
 		/** If the chef is not working on any order, request an order. */
 		if(current_recipe == NULL){
+
+			printf("Chef %d is getting a recipe\n", *chef_id);
 
 			sem_wait(&lor_mutex);
 
@@ -293,21 +306,29 @@ void chef(recipe *current_recipe){
 
 			sem_post(&lor_mutex);
 
+			printf("Chef %d got recipe %d\n", *chef_id, current_recipe->recipe_type);
+
 		} else { /** Otherwise continue on the current order. */
 
 			if (current_recipe->is_done == 0) {
 
-				sem_wait(recipe_mutex[current_recipe->recipe_type - 1]);
+				printf("Chef %d is working on recipe %d\n", *chef_id, current_recipe->recipe_type);
 
-				enter_station(current_recipe);
+				sem_wait(&recipe_mutex[current_recipe->recipe_type - 1]);
 
-				perform_step(current_recipe);
+				enter_station(chef_id, current_recipe);
 
-				leave_station(current_recipe);
+				perform_step(chef_id, current_recipe);
+
+				leave_station(chef_id, current_recipe);
 
 			} else if (current_recipe->is_done == 1){
 
-				sem_post(recipe_mutex[current_recipe->recipe_type - 1]);
+				sem_post(&recipe_mutex[current_recipe->recipe_type - 1]);
+
+				printf("Chef %d is finished recipe %d\n", *chef_id, current_recipe->recipe_type);
+
+				current_recipe = NULL;
 
 			}
 		}
@@ -322,33 +343,51 @@ void chef(recipe *current_recipe){
 
 int main (int argc, char* argv[]){
 
+	printf("Initializing semaphores ...\n");
+	
 	/** Define 3 threads for 3 chefs. */
 	pthread_t chef_1, chef_2, chef_3;
 
+	int chef_id_1 = 1; int chef_id_2 = 2; int chef_id_3 = 3;
+
+	printf("Initializing orders semaphore ...\n");
+
 	sem_init(&lor_mutex, 0, 1);
 
-	sem_init(kitchen[0], 0, 1);
-	sem_init(kitchen[1], 0, 1);
-	sem_init(kitchen[2], 0, 1);
-	sem_init(kitchen[3], 0, 1);
+	printf("Initializing kitchen semaphores ...\n");
 
-	sem_init(recipe_mutex[0], 0, 1);
-	sem_init(recipe_mutex[1], 0, 1);
-	sem_init(recipe_mutex[2], 0, 1);
-	sem_init(recipe_mutex[3], 0, 1);
-	sem_init(recipe_mutex[4], 0, 1);
+	sem_init(&kitchen[0], 0, 1);
+	sem_init(&kitchen[1], 0, 1);
+	sem_init(&kitchen[2], 0, 1);
+	sem_init(&kitchen[3], 0, 1);
+
+	printf("Initializing recipe semaphores ...\n");
+
+	sem_init(&recipe_mutex[0], 0, 1);
+	sem_init(&recipe_mutex[1], 0, 1);
+	sem_init(&recipe_mutex[2], 0, 1);
+	sem_init(&recipe_mutex[3], 0, 1);
+	sem_init(&recipe_mutex[4], 0, 1);
+	
+	printf("Creating orders ...\n");
 
 	int init = 0;
 
+	srand(time(NULL));
+
 	for (init = 0; init < N; init++) {
-		srand(time(NULL));
 		int rep_num = (rand() % 5) + 1;
 		orders[init] = generate_recipe(rep_num);
+		printf("Order number %d is recipe %d\n", init, rep_num);
 	}
 
-	pthread_create (&chef_1, NULL, (void *) &chef, NULL);
-	pthread_create (&chef_2, NULL, (void *) &chef, NULL);
-	pthread_create (&chef_3, NULL, (void *) &chef, NULL);
+	printf("Creating threads ...\n");
+
+	pthread_create (&chef_1, NULL, (void *) &chef, &chef_id_1);
+	pthread_create (&chef_2, NULL, (void *) &chef, &chef_id_2);
+	pthread_create (&chef_3, NULL, (void *) &chef, &chef_id_3);
+
+	printf("Run threads ...\n");
 
 	pthread_join(chef_1, NULL);
 	pthread_join(chef_2, NULL);
