@@ -64,18 +64,18 @@ char *get_station_name(int station_id);
 
 int current_order = 0;
 
-int chef_state[3] = {-1, -1, -1};
+int chef_state[3] = {-1, -1, -1}; /** The state of each chef. */
 
-sem_t kitchen[4];
+sem_t kitchen[4]; /** A semaphore to keep control access for each station. */
 
-sem_t recipe_mutex[5];
+//sem_t recipe_mutex[5];
 
-sem_t state_mutex;
+sem_t state_mutex; /** A semaphore to keep control access to the state of each chef. */
 
-sem_t lor_mutex;
+sem_t lor_mutex; /** A semaphore to keep control access to the list of order. */
 
 
-recipe orders[N];
+recipe orders[N]; /** List of orders. */
 
 /**
  * Function to generate a recipe.
@@ -240,7 +240,7 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 
 	chef_state[*chef_id - 1] = step_to_perform;
 
-	printf("Chef 1 is in: %s, chef 2 is in %s, chef 3 is in %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
+	printf("Chef 1 is in %s, chef 2 is in %s, chef 3 is in %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
 
 	sem_post(&state_mutex);
 
@@ -337,7 +337,7 @@ void chef(int *chef_id){
 		/** If the chef is not working on any order, request an order. */
 		if(current_recipe == NULL){
 
-			printf("Chef %d is getting a recipe\n", *chef_id);
+			printf("Chef %d is getting an order\n", *chef_id);
 
 			sem_wait(&lor_mutex);
 
@@ -347,13 +347,13 @@ void chef(int *chef_id){
 
 			sem_post(&lor_mutex);
 
-			printf("Chef %d got recipe %d\n", *chef_id, current_recipe->recipe_type);
+			printf("Chef %d got order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
 
 		} else { /** Otherwise continue on the current order. */
 
 			if (current_recipe->is_done == 0) {
 
-				printf("Chef %d is working on recipe %d\n", *chef_id, current_recipe->recipe_type);
+				printf("Chef %d is working on order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
 
 				//sem_wait(&recipe_mutex[current_recipe->recipe_type - 1]);
 
@@ -408,12 +408,13 @@ int main (int argc, char* argv[]){
 
 	printf("Initializing recipe semaphores ...\n");
 
+	/*
 	sem_init(&recipe_mutex[0], 0, 1);
 	sem_init(&recipe_mutex[1], 0, 1);
 	sem_init(&recipe_mutex[2], 0, 1);
 	sem_init(&recipe_mutex[3], 0, 1);
 	sem_init(&recipe_mutex[4], 0, 1);
-	
+	*/
 	printf("Creating orders ...\n");
 
 	int init = 0;

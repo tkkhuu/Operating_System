@@ -1,0 +1,56 @@
+// Running the program
+
+$ ./runChef 
+Initializing semaphores ...
+Initializing orders semaphore ...
+Initializing kitchen semaphores ...
+Initializing recipe semaphores ...
+Creating orders ...
+Order number 0 is recipe 5
+Order number 1 is recipe 3
+Order number 2 is recipe 2
+Order number 3 is recipe 5
+Order number 4 is recipe 1
+Order number 5 is recipe 5
+Order number 6 is recipe 5
+Order number 7 is recipe 5
+Order number 8 is recipe 2
+Order number 9 is recipe 2
+Order number 10 is recipe 2
+Order number 11 is recipe 2
+Order number 12 is recipe 4
+Order number 13 is recipe 2
+Order number 14 is recipe 1
+Order number 15 is recipe 2
+Order number 16 is recipe 4
+Order number 17 is recipe 4
+Order number 18 is recipe 5
+Order number 19 is recipe 5
+Order number 20 is recipe 1
+Order number 21 is recipe 2
+Order number 22 is recipe 4
+Order number 23 is recipe 3
+Order number 24 is recipe 1
+Order number 25 is recipe 2
+Order number 26 is recipe 1
+Order number 27 is recipe 5
+Order number 28 is recipe 1
+Order number 29 is recipe 5
+Creating threads ...
+Run threads ...
+Chef 3 is getting a recipe
+Chef 3 got recipe 5
+Chef 3 is working on recipe 5
+Chef 3 is in Wait Room, waiting to enter station Prep Area, to work on order 5, recipe 2, step 0
+Chef 1 is in: Wait Room, chef 2 is in Wait Room, chef 3 is in Prep Area
+Chef 3 is working in station Prep Area
+Chef 2 is getting a recipe
+Chef 2 got recipe 3
+Chef 2 is working on recipe 3
+Chef 2 is in Wait Room, waiting to enter station Prep Area, to work on order 3, recipe 3, step 0
+Chef 1 is getting a recipe
+Chef 1 got recipe 2
+Chef 1 is working on recipe 2
+Chef 3 finished step Prep Area of order 2, is leaving station Prep Area
+Chef 3 is working on recipe 5
+<------ Deadlock occurs

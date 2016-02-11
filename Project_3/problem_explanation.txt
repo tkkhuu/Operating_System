@@ -1,0 +1,27 @@
+Semaphore solution
+In order to simulate a chef working in the kitchen, we design each chef to have 3 state:
+Enter station: the state when a chef is about to enter the next station
+Perform: The state when a chef is perform the current step of the recipe that he is working on
+Leave station: The state when a chef is about to leave his current position
+
+Before a chef enters a station, he needs to check whether the next station is available, if not, wait
+After he makes sure that the next station is available, he must make the current station available for other chef
+
+We therefore have the following global variables: list of orders, states of each chef, a cursor to get the next order on the list.
+
+For each global variable, we create a semaphore: 
+- a semaphore to control list of orders, 
+- 3 semaphores to control each state of each chef, 
+- the cursor will associate with the list of order so it does not need its own semaphore, 
+- and 4 semaphore for 4 stations
+
+We create a struct to represent a step of a recipe, each step contains the station and the time period that the chef needs to spend at this station
+
+Then we create a struct to represent an order, each order has:
+- a recipe name
+- A list of steps
+- a cursor to keep track of the current step
+- a flag to determine whether this order is done 
+- a value to determine the number of step
+
+We create a function that can randomly generate orders from the 5 given recipes.
