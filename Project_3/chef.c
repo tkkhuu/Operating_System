@@ -218,8 +218,6 @@ recipe *next_order(){
 
 recipe oders[N];
 
-/** ============================= Chef thread. ============================= */
-
 /** ============================= Chef Actions ============================= */
 /**
  * Function to enter the stations, which is the critical regions.
@@ -283,8 +281,30 @@ void perform_step (int *chef_id, recipe *current_recipe) {
 }
 
 char *get_station_name(int station_id){
-	
+    
+    switch (station_id) {
+        case 0:
+            return "Prep Area";
+            break;
+            
+        case 1:
+            return "Stove Top";
+            break;
+            
+        case 2:
+            return "Oven"
+            break;
+            
+        case 3:
+            return "Sink";
+            break;
+            
+        default:
+            break;
+    }
 }
+
+/** ============================= Chef thread. ============================= */
 
 /**
  * The main thread chef, takes in the number to identify that chef and a pointer to the recipe that the chef will work on.
