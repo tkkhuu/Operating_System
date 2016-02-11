@@ -1,4 +1,4 @@
-Semaphore solution
+=================== Semaphore solution  ===================
 In order to simulate a chef working in the kitchen, we design each chef to have 3 state:
 Enter station: the state when a chef is about to enter the next station
 Perform: The state when a chef is perform the current step of the recipe that he is working on
@@ -25,3 +25,22 @@ Then we create a struct to represent an order, each order has:
 - a value to determine the number of step
 
 We create a function that can randomly generate orders from the 5 given recipes.
+
+Questions:
+- In what cases can a deadlock occur? Is there a reliable way to predict a deadlock in advance and avoid
+such scenarios?
+- What is the most fair way to avoid starvation? In what cases is it reasonable to sacrifice perfor-
+mance/parallelism to avoid starvation?
+
+Answers: 
+- A situation when deadlock happens is when 3 chefs are waiting to enter each other's part of the kitchen. 
+  For example chef 1 in stove, chef 2 in oven and chef 3 in sink.
+  Chef 1 is waiting to enter oven, chef 2 is waiting to enter sink and chef 3 is waiting to enter stove.
+  One way to avoid deadlock is that if it happens, we can drop one of the chefs with his current order to allow the other chef to continue.
+  The droped order will be re-added to the queue to be processed. 
+  
+- The most fairway to avoid starvation if to give a waiting the priority to go first if he has been waiting for more than a value of time.
+- It is reasonable when an order has to be done after it has been waiting for too long, we want to satisfy the customer as well.
+
+
+
