@@ -82,12 +82,16 @@ int main (int argc, char* argv[]){
  * Function to enter the stations, which is the critical regions.
  */
 void enter_station(int *chef_id, recipe *current_recipe, int order_number){
+    
+    printf("#DEBUG enter station: chef %d", *chef_id);
 
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action; // Next step to be performed: will either be PREP, STOVE, OVEN or SINK
-	printf("Chef %d is waiting for %s\n", *chef_id, get_station_name(step_to_perform));
-	sem_wait(&state_mutex);
+    
+    printf("Chef %d is waiting for %s\n", *chef_id, get_station_name(step_to_perform));
+	
+    sem_wait(&state_mutex);
 
-	printf("Chef %d is in %s, waiting to enter station %s, to work on order %d, recipe %d, step %d\n", *chef_id, get_station_name(chef_state[*chef_id - 1]), get_station_name(step_to_perform), current_recipe-> recipe_type, order_number, step_to_perform);	
+	printf("Chef %d is in %s, waiting to enter station %s, to work on order %d, recipe %d, step %d\n", *chef_id, get_station_name(chef_state[*chef_id - 1]), get_station_name(step_to_perform), current_recipe->recipe_type, order_number, step_to_perform);
 	
 	sem_wait(&kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep	
 
@@ -115,7 +119,7 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
 	// Move to next step on the recipe steps, if no more step, mark the recipe as finished.
 	if (current_recipe->next_action == current_recipe->num_action) {
 		current_recipe->is_done = 1;
-		printf("Order %d is finished by chef %d\n", order_number, *chef_id);
+		//printf("Order %d is finished by chef %d\n", order_number, *chef_id);
 	} else {
 		current_recipe->next_action++;
 	}
@@ -141,7 +145,7 @@ void perform_step (int *chef_id, recipe *current_recipe, int order_number) {
 
 	gettimeofday(&start, NULL);
 
-	printf("Chef %d is working in station %s\n", *chef_id, get_station_name(curr_station));
+	//printf("Chef %d is working in station %s\n", *chef_id, get_station_name(curr_station));
 
 	while ( time_elapsed < time_taken) {
 
