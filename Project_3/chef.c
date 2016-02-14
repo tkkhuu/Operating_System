@@ -83,27 +83,30 @@ int main (int argc, char* argv[]){
  */
 void enter_station(int *chef_id, recipe *current_recipe, int order_number){
     
-    printf("#DEBUG enter station: chef %d", *chef_id);
+    printf("========> #DEBUG enter station: chef %d\n", *chef_id);
 
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action; // Next step to be performed: will either be PREP, STOVE, OVEN or SINK
-    
-    printf("Chef %d is waiting for %s\n", *chef_id, get_station_name(step_to_perform));
 	
-    sem_wait(&state_mutex);
+	printf("Chef %d waiting for %s\n", *chef_id, get_station_name(step_to_perform));
 
-	printf("Chef %d is in %s, waiting to enter station %s, to work on order %d, recipe %d, step %d\n", *chef_id, get_station_name(chef_state[*chef_id - 1]), get_station_name(step_to_perform), current_recipe->recipe_type, order_number, step_to_perform);
-	
 	sem_wait(&kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep	
+
+	sem_wait(&state_mutex);
+
+	printf("Chef state: %d, %d, %d\n", chef_state[0], chef_state[1], chef_state[2]);
 
 	if (chef_state[*chef_id - 1] != -1) {
 		sem_post(&kitchen[chef_state[*chef_id - 1]]);
+		printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
 	}
 
 	chef_state[*chef_id - 1] = step_to_perform;
 
-	printf("Chef 1 is in %s, chef 2 is in %s, chef 3 is in %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
+	printf("Chef 1: %s, chef 2: %s, chef 3: %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
 
 	sem_post(&state_mutex);
+
+	printf("********** #END DEBUG Chef %d\n", *chef_id);
 
 }
 
@@ -177,9 +180,9 @@ void chef(int *chef_id){
 
 			sem_wait(&lor_mutex);
 
-			current_recipe = next_order(orders, &current_order, N);
-
 			order_num = current_order + 1;
+
+			current_recipe = next_order(orders, &current_order, N);
 
 			sem_post(&lor_mutex);
 
@@ -189,7 +192,7 @@ void chef(int *chef_id){
 
 			if (current_recipe->is_done == 0) {
 
-				printf("Chef %d is working on order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
+				//printf("Chef %d is working on order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
 
 				enter_station(chef_id, current_recipe, order_num);
 
