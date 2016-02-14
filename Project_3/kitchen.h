@@ -1,15 +1,21 @@
 #ifndef _CHEF_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
+
 #define PREP   0
 #define STOVE  1
 #define OVEN   2
 #define SINK   3
-#define IDLE   4
+#define IDLE  -1
+
+
 
 /**
  * A struct that can represent a step of the kitchen
  */
-typedef struct {
+typedef struct kitchen_step_struct {
     
     /** An action in the kitchen: PREP, STOVE, OVEN, SINK. */
     int action;
@@ -22,7 +28,7 @@ typedef struct {
 /**
  * A struct that can represent a recipe
  */
-typedef struct {
+typedef struct recipe_struct {
     
     /** Recipe type. */
     int recipe_type;
@@ -47,7 +53,7 @@ char *get_station_name(int station_id);
 
 recipe generate_recipe(unsigned int rep_num);
 
-recipe *next_order(recipe *orders);
+recipe *next_order(recipe *orders, int *current_order, int order_size);
 
 char *get_station_name(int station_id);
 

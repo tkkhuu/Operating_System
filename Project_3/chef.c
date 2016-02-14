@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include <time.h>
 
+#include "kitchen.h"
+
 #define N 30 // Number of orders
 #define CHEF_NUM 3
 #define TRUE 1
@@ -82,7 +84,7 @@ int main (int argc, char* argv[]){
 void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action; // Next step to be performed: will either be PREP, STOVE, OVEN or SINK
-
+	printf("Chef %d is waiting for %s\n", *chef_id, get_station_name(step_to_perform));
 	sem_wait(&state_mutex);
 
 	printf("Chef %d is in %s, waiting to enter station %s, to work on order %d, recipe %d, step %d\n", *chef_id, get_station_name(chef_state[*chef_id - 1]), get_station_name(step_to_perform), current_recipe-> recipe_type, order_number, step_to_perform);	
@@ -108,7 +110,7 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
 
 	int step_finished = current_recipe->steps[current_recipe->next_action].action; // Get the step that the chef just finished
 
-	printf("Chef %d finished step %s of order %d, is leaving station %s\n", *chef_id, get_station_name(step_finished), order_number, get_station_name(step_finished));
+	//printf("Chef %d finished step %s of order %d, is leaving station %s\n", *chef_id, get_station_name(step_finished), order_number, get_station_name(step_finished));
 
 	// Move to next step on the recipe steps, if no more step, mark the recipe as finished.
 	if (current_recipe->next_action == current_recipe->num_action) {
@@ -167,11 +169,11 @@ void chef(int *chef_id){
 		/** If the chef is not working on any order, request an order. */
 		if(current_recipe == NULL){
 
-			printf("Chef %d is getting an order\n", *chef_id);
+			//printf("Chef %d is getting an order\n", *chef_id);
 
 			sem_wait(&lor_mutex);
 
-			current_recipe = next_order();
+			current_recipe = next_order(orders, &current_order, N);
 
 			order_num = current_order + 1;
 

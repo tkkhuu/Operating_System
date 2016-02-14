@@ -125,18 +125,18 @@ recipe generate_recipe(unsigned int rep_num){
 /**
  * Function to get the next order
  */
-recipe *next_order(recipe *orders){
+recipe *next_order(recipe *orders, int *current_order, int order_size){
     
-    recipe *next_order = &(orders[current_order]);
+    recipe *next_order = &(orders[*current_order]);
     
     if (next_order->is_done == 1) {
         next_order = NULL;
     }
     
-    current_order++;
+    (*current_order)++;
     
-    if (current_order > N) {
-        current_order = 0;
+    if ((*current_order) > order_size) {
+        (*current_order) = 0;
     }
     
     return next_order;
