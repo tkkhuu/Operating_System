@@ -20,13 +20,19 @@ int current_order = 0;
 
 int chef_state[3] = {IDLE, IDLE, IDLE}; /** The state of each chef. */
 
+int chef_priority[3];
+
 sem_t kitchen[4];                       /** A semaphore to keep control access for each station. */
 
 sem_t state_mutex;                      /** A semaphore to keep control access to the state of each chef. */
 
+sem_t priority_mutex;
+
 sem_t lor_mutex;                        /** A semaphore to keep control access to the list of order. */
 
 recipe orders[N];                       /** List of orders. */
+
+const struct timespec wait_limit[] = {16, 0};
 
 /** ============================= Main function ============================= */
 
@@ -88,26 +94,62 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action; // Next step to be performed: will either be PREP, STOVE, OVEN or SINK
 	
 	printf("Chef %d waiting for %s\n", *chef_id, get_station_name(step_to_perform));
+    
+    if (sem_timedwait(&kitchen[step_to_perform], wait_limit) < 0){
+        int occupied_by = -1;
+        sem_wait(&state_mutex);
+        occupied_by = get_station_name(step_to_perform);
+        sem_post(&state_mutex);
+        sem_wait(&priority_mutex);
+        if (chef_priority[*chef_id - 1] > chef_priority[occupied_by]) {
+            sem_post(&priority_mutex);
+            sem_wait(&kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep
+            sem_wait(&state_mutex);
+            
+            printf("Chef state: %d, %d, %d\n", chef_state[0], chef_state[1], chef_state[2]);
+            
+            if (chef_state[*chef_id - 1] != -1) {
+                sem_post(&kitchen[chef_state[*chef_id - 1]]);
+                printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
+            }
+            
+            chef_state[*chef_id - 1] = step_to_perform;
+            
+            printf("Chef 1: %s, chef 2: %s, chef 3: %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
+            
+            sem_post(&state_mutex);
+            
+            printf("********> #END DEBUG Chef %d\n", *chef_id);
 
-	sem_wait(&kitchen[step_to_perform]); // If the part of this kitchen is being used, sleep	
+        } else{
+            sem_wait(&state_mutex);
+            chef_state[*chef_id - 1] = -1;
+            sem_post(&state_mutex);
+            current_recipe->next_action = 0;
+        }
+        
+    } else {
+        sem_wait(&state_mutex);
+        
+        printf("Chef state: %d, %d, %d\n", chef_state[0], chef_state[1], chef_state[2]);
+        
+        if (chef_state[*chef_id - 1] != -1) {
+            sem_post(&kitchen[chef_state[*chef_id - 1]]);
+            printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
+        }
+        
+        chef_state[*chef_id - 1] = step_to_perform;
+        
+        printf("Chef 1: %s, chef 2: %s, chef 3: %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
+        
+        sem_post(&state_mutex);
+        
+        printf("********> #END DEBUG Chef %d\n", *chef_id);
+    }
+    
+	
 
-	sem_wait(&state_mutex);
-
-	printf("Chef state: %d, %d, %d\n", chef_state[0], chef_state[1], chef_state[2]);
-
-	if (chef_state[*chef_id - 1] != -1) {
-		sem_post(&kitchen[chef_state[*chef_id - 1]]);
-		printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
-	}
-
-	chef_state[*chef_id - 1] = step_to_perform;
-
-	printf("Chef 1: %s, chef 2: %s, chef 3: %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
-
-	sem_post(&state_mutex);
-
-	printf("********** #END DEBUG Chef %d\n", *chef_id);
-
+	
 }
 
 /**
@@ -211,6 +253,19 @@ void chef(int *chef_id){
 
 	}
 
+}
+
+int get_chef_in_station(int station){
+    if (chef_state[0] == station) {
+        return 0;
+    }
+    else if(chef_state[1] == station){
+        return 1;
+    }
+    else if (chef_state[2] == station){
+        return 2;
+    }
+    else return -1;
 }
 
 /**
