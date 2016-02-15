@@ -10,4 +10,4 @@ kitchen.o: kitchen.c kitchen.h
 	gcc -g -c kitchen.c
 
 clean:
-	rm -f *.o run_chef
+	rm -f *.o chef

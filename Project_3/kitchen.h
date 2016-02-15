@@ -44,6 +44,8 @@ typedef struct recipe_struct {
     
     /** The number of steps in this recipe, which is the size of steps[]. */
     unsigned int num_action;
+
+		unsigned int in_progress;
     
 } recipe;
 
