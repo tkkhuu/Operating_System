@@ -267,9 +267,9 @@ void chef(int *chef_id){
 			sem_wait(&lor_mutex);
 
 			int k;
-printf("Chef %d checking for dropped order\n", *chef_id);
+			printf("Chef %d checking for dropped order\n", *chef_id);
 			for(k = 0; k < 30; k++){
-				
+
 				if(orders[k].is_done == 2){
 					order_num = k + 1;
 					current_recipe = &orders[k];
@@ -280,7 +280,7 @@ printf("Chef %d checking for dropped order\n", *chef_id);
 				}
 			}
 			if(current_recipe == NULL){
-				
+
 
 				current_recipe = next_order(orders, &order_cursor, N);
 
@@ -295,7 +295,7 @@ printf("Chef %d checking for dropped order\n", *chef_id);
 			if (current_recipe->is_done == 2) {
 				printf("Chef %d move onto next order\n", *chef_id);
 				sem_wait(&lor_mutex);
-				
+
 				current_recipe = next_order(orders, &order_cursor, N);
 				order_num = order_cursor;
 				sem_post(&lor_mutex);

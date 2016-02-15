@@ -135,7 +135,7 @@ recipe *next_order(recipe *orders, int *current_order, int order_size){
 		next_order =  NULL;
 	}
 
-else {
+	else {
 
 		next_order->in_progress = 1;
 	}

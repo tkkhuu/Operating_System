@@ -16,37 +16,37 @@
  * A struct that can represent a step of the kitchen
  */
 typedef struct kitchen_step_struct {
-    
-    /** An action in the kitchen: PREP, STOVE, OVEN, SINK. */
-    int action;
-    
-    /** The time taken for this step in seconds. */
-    int time_period;
-    
+
+	/** An action in the kitchen: PREP, STOVE, OVEN, SINK. */
+	int action;
+
+	/** The time taken for this step in seconds. */
+	int time_period;
+
 } kitchen_step;
 
 /**
  * A struct that can represent a recipe
  */
 typedef struct recipe_struct {
-    
-    /** Recipe type. */
-    int recipe_type;
-    
-    /** An array of kitchen_step to be performed. */
-    kitchen_step *steps;
-    
-    /** A cursor to next action to be performed in the array. */
-    unsigned int next_action;
-    
-    /** A boolean to determine whether this recipe is finished, 0 means unfinished and 1 means finished. */
-    unsigned short is_done;
-    
-    /** The number of steps in this recipe, which is the size of steps[]. */
-    unsigned int num_action;
 
-		unsigned int in_progress;
-    
+	/** Recipe type. */
+	int recipe_type;
+
+	/** An array of kitchen_step to be performed. */
+	kitchen_step *steps;
+
+	/** A cursor to next action to be performed in the array. */
+	unsigned int next_action;
+
+	/** A boolean to determine whether this recipe is finished, 0 means unfinished and 1 means finished. */
+	unsigned short is_done;
+
+	/** The number of steps in this recipe, which is the size of steps[]. */
+	unsigned int num_action;
+
+	unsigned int in_progress;
+
 } recipe;
 
 /** ============ Function prototypes ============ */
