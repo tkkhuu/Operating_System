@@ -1,13 +1,19 @@
-all: chef
+all: chef_sem chef_cond
 
-chef: chef.o kitchen.o
-	gcc -pthread -g chef.o kitchen.o -o chef
+chef_sem: chef.o kitchen.o
+	gcc -pthread -g chef.o kitchen.o -o chef_sem
 
-chef.o: chef.c kitchen.h
-	gcc -c -g chef.c
+chef_cond: chef.o kitchen.o
+    gcc -pthread -g chef.o kitchen.o -o chef_cond
+
+chef_sem.o: chef_sem.c kitchen.h
+	gcc -c -g chef_sem.c
+
+chef_cond.o: chef_cond.c kitchen.h
+    gcc -c -g chef_cond.c
 
 kitchen.o: kitchen.c kitchen.h
 	gcc -g -c kitchen.c
 
 clean:
-	rm -f *.o chef
+	rm -f *.o chef_sem chef_cond
