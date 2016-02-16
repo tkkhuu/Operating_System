@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <semaphore.h>
 #include <sys/time.h>
 #include <time.h>
 
@@ -37,7 +36,7 @@ recipe orders[N];       /** List of orders. */
 
 pthread_cond_t kitchen_cond[4];     /** A condition variables to keep control access for each station. */
 
-pthread_cond_t kitchen_mutex[4];    /** Mutexes to keep control access for each station. */
+pthread_mutex_t kitchen_mutex[4];    /** Mutexes to keep control access for each station. */
 
 pthread_mutex_t state_mutex;        /** A semaphore to keep control access to the state of each chef. */
 
@@ -108,9 +107,9 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
             
             pthread_mutex_unlock(&state_mutex);
             
-            pthread_mutex_lock(&chef_next_state);
+            pthread_mutex_lock(&next_state_mutex);
             chef_next_state[*chef_id - 1] = current_recipe->steps[current_recipe->next_action + 1].action
-            pthread_mutex_unlock(&chef_next_state);
+            pthread_mutex_unlock(&next_state_mutex);
             
             pthread_mutex_lock(&priority_mutex);
             chef_priority[*chef_id - 1] = current_recipe->next_action;
@@ -133,9 +132,9 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
             
             pthread_mutex_unlock(&state_mutex);
             
-            pthread_mutex_lock(&chef_next_state);
+            pthread_mutex_lock(&next_state_mutex);
             chef_next_state[*chef_id - 1] = current_recipe->steps[current_recipe->next_action + 1].action
-            pthread_mutex_unlock(&chef_next_state);
+            pthread_mutex_unlock(&next_state_mutex);
             
             // Resetting the order
             pthread_mutex_lock(&lor_mutex);
@@ -166,9 +165,9 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
         
         pthread_mutex_unlock(&state_mutex);
         
-        pthread_mutex_lock(&chef_next_state);
+        pthread_mutex_lock(&next_state_mutex);
         chef_next_state[*chef_id - 1] = current_recipe->steps[current_recipe->next_action + 1].action
-        pthread_mutex_unlock(&chef_next_state);
+        pthread_mutex_unlock(&next_state_mutex);
         
         pthread_mutex_lock(&priority_mutex);
         chef_priority[*chef_id - 1] = current_recipe->next_action;
@@ -255,7 +254,7 @@ void chef(int *chef_id){
             
             printf("Chef %d is getting an order\n", *chef_id);
             
-            sem_wait(&lor_mutex);
+            pthread_mutex_lock(&lor_mutex);
             
             int k;
             printf("Chef %d checking for dropped order\n", *chef_id);
@@ -277,7 +276,7 @@ void chef(int *chef_id){
                 
                 order_num = order_cursor;
             }
-            sem_post(&lor_mutex);
+            pthread_mutex_unlock(&lor_mutex);
             
             //printf("Chef %d got order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
             
@@ -285,11 +284,11 @@ void chef(int *chef_id){
             
             if (current_recipe->is_done == 2) {
                 printf("Chef %d move onto next order\n", *chef_id);
-                sem_wait(&lor_mutex);
+                pthread_mutex_lock(&lor_mutex);
                 
                 current_recipe = next_order(orders, &order_cursor, N);
                 order_num = order_cursor;
-                sem_post(&lor_mutex);
+                pthread_mutex_unlock(&lor_mutex);
             }
             
             else if (current_recipe->is_done == 0) {
@@ -302,8 +301,8 @@ void chef(int *chef_id){
                 
                 leave_station(chef_id, current_recipe, order_num);
                 
-                sem_wait(&priority_mutex);
-                sem_wait(&lor_mutex);
+                pthread_mutex_lock(&priority_mutex);
+                pthread_mutex_lock(&lor_mutex);
                 int count = 0; int k = 0;
                 printf("Chef %d: [", *chef_id);
                 for(k = 0; k < 30; k++){
@@ -319,8 +318,8 @@ void chef(int *chef_id){
                     }
                 }
                 printf("]\nOrders done: %d\n", count);
-                sem_post(&lor_mutex);
-                sem_post(&priority_mutex);
+                pthread_mutex_unlock(&lor_mutex);
+                pthread_mutex_unlock(&priority_mutex);
                 
             } else if (current_recipe->is_done == 1){
                 
@@ -347,18 +346,25 @@ int main (int argc, char* argv[]){
     
     printf("Initializing orders semaphore ...\n");
     
-    sem_init(&lor_mutex, 0, 1);
+    pthread_mutex_init(&lor_mutex, 0);
     
-    sem_init(&state_mutex, 0, 1);
+    pthread_mutex_init(&state_mutex, 0);
     
-    sem_init(&priority_mutex, 0, 1);
+    pthread_mutex_init(&priority_mutex, 0);
+    
+    pthread_mutex_init(&next_state_mutex, 0);
     
     printf("Initializing kitchen semaphores ...\n");
     
-    sem_init(&kitchen[0], 0, 1);
-    sem_init(&kitchen[1], 0, 1);
-    sem_init(&kitchen[2], 0, 1);
-    sem_init(&kitchen[3], 0, 1);
+    pthread_mutex_init(&kitchen_mutex[0], 0);
+    pthread_mutex_init(&kitchen_mutex[1], 0);
+    pthread_mutex_init(&kitchen_mutex[2], 0);
+    pthread_mutex_init(&kitchen_mutex[3], 0);
+    
+    pthread_cond_init(&kitchen_mutex[0], 0);
+    pthread_cond_init(&kitchen_mutex[1], 0);
+    pthread_cond_init(&kitchen_mutex[2], 0);
+    pthread_cond_init(&kitchen_mutex[3], 0);
     
     printf("Creating orders ...\n");
     
