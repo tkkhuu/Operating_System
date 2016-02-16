@@ -22,13 +22,11 @@ int get_chef_in_station(int station);
 /** Global Variables. */
 int current_order = 0;
 
-int chef_state[3] = {IDLE, IDLE, IDLE}; /** The state of each chef. */
+int chef_state[3] = {IDLE, IDLE, IDLE};         /** The state of each chef. */
 
-int chef_next_state[3] = {IDLE, IDLE, IDLE};
+int chef_next_state[3] = {IDLE, IDLE, IDLE};    /** The next state of each chef, for detecting deadlock. */
 
-int chef_priority[3] = {0, 0, 0};
-
-struct timespec wait_limit;
+int chef_priority[3] = {0, 0, 0};               /** The priority of each chef to continue on his current state, use to prevent deadlock. */
 
 recipe orders[N];       /** List of orders. */
 
@@ -36,15 +34,15 @@ recipe orders[N];       /** List of orders. */
 
 pthread_cond_t kitchen_cond[4];     /** A condition variables to keep control access for each station. */
 
-pthread_mutex_t kitchen_mutex[4];    /** Mutexes to keep control access for each station. */
+pthread_mutex_t kitchen_mutex[4];   /** A mutexes to keep control access for each station. */
 
-pthread_mutex_t state_mutex;        /** A semaphore to keep control access to the state of each chef. */
+pthread_mutex_t state_mutex;        /** A mutex to keep control access to the state of each chef. */
 
-pthread_mutex_t next_state_mutex;
+pthread_mutex_t next_state_mutex;   /** A mutex to keep control access to the next state of each chef.*/
 
-pthread_mutex_t priority_mutex;     /** Mutex to keep control access to the priority of each chef. */
+pthread_mutex_t priority_mutex;     /** A mutex to keep control access to the priority of each chef. */
 
-pthread_mutex_t lor_mutex;          /** Mutex to keep control access to the list of order. */
+pthread_mutex_t lor_mutex;          /** A mutex to keep control access to the list of order. */
 
 /** ============================= Chef Actions ============================= */
 /**
@@ -52,22 +50,25 @@ pthread_mutex_t lor_mutex;          /** Mutex to keep control access to the list
  */
 void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 
-	printf("========> #DEBUG enter station: chef %d\n", *chef_id);
+	printf("========> Chef %d enter station: \n", *chef_id);
 
 	// Next step to be performed: will either be PREP, STOVE, OVEN or SINK
 	int step_to_perform = current_recipe->steps[current_recipe->next_action].action;
 
 	printf("Chef %d is waiting for %s\n", *chef_id, get_station_name(step_to_perform));
 
+    // ****************************** Detecting Deadlock *******************************
 	pthread_mutex_lock(&state_mutex);
 	int chef_current_state = chef_state[*chef_id - 1];
 	pthread_mutex_unlock(&state_mutex);
 	
-	int waited_by = -1; unsigned int potential_deadlock = 0;
+	int waited_by = -1; // A variable indicating the chef who is waiting for the current state
+    unsigned int potential_deadlock = 0; // 0 indicates no deadlock, 1 indicates deadlock may occur
 
-	if(chef_current_state != IDLE){
+	if(chef_current_state != IDLE){ // Check if the current state is waited by other chef
 
 		pthread_mutex_lock(&next_state_mutex);
+        
 		int k = 0;
 		for (k = 0; k < 3; k++) {
 			if (chef_next_state[k] == chef_current_state){
@@ -77,10 +78,10 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 
 		if (waited_by != IDLE) {
 
-			if (chef_next_state[*chef_id - 1] == chef_state[waited_by]) {
+			if (chef_next_state[*chef_id - 1] == chef_state[waited_by]) { // Check if next state is occupied by the "waited_by" chef
 				potential_deadlock = 1;
 			}
-
+            // Check if there's a waiting circle, for example: 1 wait for 2, 2 wait for 3 and 3 wait for 1
 			else if (check_deadlock(chef_state[0]) && check_deadlock(chef_state[1]) && check_deadlock(chef_state[2])) {
 				potential_deadlock = 1;
 			}
@@ -89,10 +90,12 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 		pthread_mutex_unlock(&next_state_mutex);
 	}
 	
-	// Check if the station is available, if not, only waits for WAIT_LIMIT seconds
-	if (potential_deadlock == 1){
+    // ****************************** Dealing with potential deadlock *******************************
+	if (potential_deadlock == 1){ // If potential deadlock detected
 
 		pthread_mutex_lock(&priority_mutex);
+        
+        // check the priority of the current chef, if higher than waited_by chef, it gets to continue
 		if (chef_priority[*chef_id - 1] > chef_priority[waited_by]) {
 
 			printf("POTENTIAL DEADLOCK: Chef %d waited too long for station %s, but it has higher priority, so it continues, released station %s\n", *chef_id, get_station_name(step_to_perform), get_station_name(chef_state[*chef_id - 1]));
@@ -111,10 +114,13 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 				
 			}
 			pthread_mutex_unlock(&state_mutex);
+            
+            // Moving the chef to next state
 			pthread_mutex_lock(&state_mutex);
+            
 			if (chef_state[*chef_id - 1] != IDLE) {
-				pthread_mutex_unlock(&kitchen_mutex[chef_current_state]);
-				pthread_cond_signal(&kitchen_cond[chef_current_state]);
+				pthread_mutex_unlock(&kitchen_mutex[chef_current_state]);   // Unlock the current station
+				pthread_cond_signal(&kitchen_cond[chef_current_state]);     // Signa whoever chef waiting for the current station
 			}
 
 			chef_state[*chef_id - 1] = step_to_perform;
@@ -130,7 +136,7 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 			chef_priority[*chef_id - 1] = current_recipe->next_action;
 			pthread_mutex_unlock(&priority_mutex);
 
-		} else{
+		} else{ // If the current chef has lower priority, return the order and go get a new order.
 
 			printf("XXXXXXXXXXXX  POTENTIAL DEADLOCK, Chef %d drop order %d, released station %s\n", *chef_id, order_number, get_station_name(chef_state[*chef_id - 1]));
 
@@ -139,8 +145,8 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 			pthread_mutex_lock(&state_mutex);
 
 			if (chef_state[*chef_id - 1] != IDLE) {
-				pthread_mutex_unlock(&kitchen_mutex[chef_current_state]);
-				pthread_cond_signal(&kitchen_cond[chef_current_state]);
+				pthread_mutex_unlock(&kitchen_mutex[chef_current_state]); // unlock the current station
+				pthread_cond_signal(&kitchen_cond[chef_current_state]); // signal whoever chef waiting for this station
 			}
 
 			chef_state[*chef_id - 1] = IDLE;
@@ -165,7 +171,7 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 
 		}
 
-	} else { // If the station is available
+	} else { // If the station is available, no deadlock detected, move on
 		pthread_mutex_lock(&state_mutex);
 		int j = 0;
 		for (j = 0; j < 3; j++){
@@ -176,9 +182,9 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 			}
 			
 		}
-		//pthread_mutex_unlock(&state_mutex);
+        
 		printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
-		//pthread_mutex_lock(&state_mutex);
+        
 		if (chef_state[*chef_id - 1] != IDLE) {
 			pthread_mutex_unlock(&kitchen_mutex[chef_current_state]);
 			pthread_cond_signal(&kitchen_cond[chef_current_state]);
@@ -200,7 +206,6 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 	pthread_mutex_lock(&state_mutex);
     printf("Chef 1: %s, chef 2: %s, chef 3: %s\n", get_station_name(chef_state[0]), get_station_name(chef_state[1]), get_station_name(chef_state[2]));
     pthread_mutex_unlock(&state_mutex);
-    printf("********> #END DEBUG Chef %d\n", *chef_id);
 }
 
 /**
@@ -210,6 +215,7 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
 
 	//pthread_mutex_lock(&state_mutex);
 
+    // After finishing the step, update the recipe, check if recipe is finished.
 	if (chef_state[*chef_id - 1] != IDLE){
 
 		int step_finished = current_recipe->steps[current_recipe->next_action].action; // Get the step that the chef just finished
@@ -313,7 +319,6 @@ void chef(int *chef_id){
 				}
 			}
 			if(current_recipe == NULL){
-
 
 				current_recipe = next_order(orders, &order_cursor, N);
 
