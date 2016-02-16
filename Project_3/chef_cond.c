@@ -135,7 +135,7 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 			pthread_mutex_unlock(&state_mutex);
 
 			pthread_mutex_lock(&next_state_mutex);
-			chef_next_state[*chef_id - 1] = current_recipe->steps[current_recipe->next_action + 1].action;
+			chef_next_state[*chef_id - 1] = -1;
 			pthread_mutex_unlock(&next_state_mutex);
 
 			// Resetting the order
