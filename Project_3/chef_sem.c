@@ -16,6 +16,7 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number);
 void leave_station(int *chef_id, recipe *current_recipe, int order_number);
 void perform_step (int *chef_id, recipe *current_recipe, int order_number);
 int get_chef_in_station(int station);
+int check_deadlock(int value);
 
 int current_order = 0;
 
@@ -107,34 +108,39 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
     
     sem_wait(&state_mutex);
     int chef_current_state = chef_state[*chef_id - 1];
-    sem_post(&state_mutex);
+    
     
     int waited_by = -1; unsigned int potential_deadlock = 0;
     
-    if(chef_current_state != -1){
+    if(chef_current_state != IDLE){
         
         sem_wait(&next_state_mutex);
-        int k = 0;
+        int k = 0; int i = 0;
         for (k = 0; k < 3; k++) {
             if (chef_next_state[k] == chef_current_state){
                 waited_by = k;
             }
         }
         
-        if (waited_by != -1) {
+        if (waited_by != IDLE) {
             
             if (chef_next_state[*chef_id - 1] == chef_state[waited_by]) {
                 potential_deadlock = 1;
             }
+
+			else if (check_deadlock(chef_state[0]) && check_deadlock(chef_state[1]) && check_deadlock(chef_state[2])) {
+				potential_deadlock = 1;
+			}
         }
         
         sem_post(&next_state_mutex);
+		
     }
-    
+    sem_post(&state_mutex);
     if (potential_deadlock == 1){
         
        
-        if (chef_priority[*chef_id - 1] > chef_priority[occupied_by]) {
+        if (chef_priority[*chef_id - 1] > chef_priority[waited_by]) {
             
             printf("POTENTIAL DEADLOCK: Chef %d waited too long for station %s, but it has higher priority, so it continues, released station %s\n", *chef_id, get_station_name(step_to_perform), get_station_name(chef_state[*chef_id - 1]));
             
@@ -168,11 +174,11 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
             if (chef_state[*chef_id - 1] != -1) {
                 sem_post(&kitchen[chef_state[*chef_id - 1]]);
             }
-            chef_state[*chef_id - 1] = -1;
+            chef_state[*chef_id - 1] = IDLE;
             sem_post(&state_mutex);
             
             sem_wait(&next_state_mutex);
-            chef_next_state[*chef_id - 1] = -1;
+            chef_next_state[*chef_id - 1] = IDLE;
             sem_post(&next_state_mutex);
             
             sem_wait(&lor_mutex);
@@ -189,6 +195,8 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
         }
         
     } else {
+
+		sem_wait(&kitchen[step_to_perform]);
         sem_wait(&state_mutex);
         
         printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
@@ -235,6 +243,11 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
         if (current_recipe->next_action == current_recipe->num_action - 1) {
             current_recipe->is_done = 1;
             current_recipe->in_progress = 0;
+				sem_post(&kitchen[chef_state[*chef_id - 1]]);
+				chef_state[*chef_id - 1] = -1;
+				sem_wait(&next_state_mutex);
+				chef_next_state[*chef_id - 1] = -1;
+				sem_post(&next_state_mutex);
             //printf("Order %d is finished by chef %d\n", order_number, *chef_id);
         } else {
             current_recipe->next_action++;
@@ -393,6 +406,15 @@ int get_chef_in_station(int station){
         return 2;
     }
     else return -1;
+}
+
+int check_deadlock(int value){
+	int a = 0;
+	for (a = 0; a < 3; a++) {
+		if (chef_next_state[a] == value) return 1;
+	}
+
+	return 0;
 }
 
 
