@@ -176,9 +176,9 @@ void enter_station(int *chef_id, recipe *current_recipe, int order_number){
 			}
 			
 		}
-		pthread_mutex_unlock(&state_mutex);
+		//pthread_mutex_unlock(&state_mutex);
 		printf("Chef %d released station %s\n", *chef_id, get_station_name(chef_state[*chef_id - 1]));
-		pthread_mutex_lock(&state_mutex);
+		//pthread_mutex_lock(&state_mutex);
 		if (chef_state[*chef_id - 1] != IDLE) {
 			pthread_mutex_unlock(&kitchen_mutex[chef_current_state]);
 			pthread_cond_signal(&kitchen_cond[chef_current_state]);
@@ -216,16 +216,23 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
 
 		// Move to next step on the recipe steps, if no more step, mark the recipe as finished.
 		if (current_recipe->next_action == current_recipe->num_action - 1) {
+			pthread_mutex_lock(&lor_mutex);
 			current_recipe->is_done = 1;
 			current_recipe->in_progress = 0;
+			pthread_mutex_unlock(&lor_mutex);
+
 			pthread_mutex_unlock(&kitchen_mutex[step_finished]);
 			pthread_cond_signal(&kitchen_cond[step_finished]);
+
 			chef_state[*chef_id - 1] = IDLE;
+
 			pthread_mutex_lock(&next_state_mutex);
 			chef_next_state[*chef_id - 1] = IDLE;
 			pthread_mutex_unlock(&next_state_mutex);
 		} else {
+			pthread_mutex_lock(&lor_mutex);
 			current_recipe->next_action++;
+			pthread_mutex_unlock(&lor_mutex);
 		}
 	}
 
@@ -242,10 +249,12 @@ void perform_step (int *chef_id, recipe *current_recipe, int order_number) {
 	pthread_mutex_lock(&state_mutex);
 
 	if(chef_state[*chef_id - 1] != IDLE){
+
+		pthread_mutex_lock(&lor_mutex);
 		int curr_station = current_recipe->steps[current_recipe->next_action].action;
 
 		int time_taken = current_recipe->steps[current_recipe->next_action].time_period;
-
+		pthread_mutex_unlock(&lor_mutex);
 		struct timeval start, end;
 
 		int time_elapsed = 0;
@@ -315,7 +324,7 @@ void chef(int *chef_id){
 			//printf("Chef %d got order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
 
 		} else { /** Otherwise continue on the current order. */
-
+			
 			if (current_recipe->is_done == 2) {
 				printf("Chef %d move onto next order\n", *chef_id);
 				pthread_mutex_lock(&lor_mutex);
@@ -324,7 +333,7 @@ void chef(int *chef_id){
 				order_num = order_cursor;
 				pthread_mutex_unlock(&lor_mutex);
 			}
-
+			
 			else if (current_recipe->is_done == 0) {
 
 				printf("Chef %d is working on order %d, recipe %d\n", *chef_id, order_num, current_recipe->recipe_type);
@@ -334,6 +343,7 @@ void chef(int *chef_id){
 				perform_step(chef_id, current_recipe, order_num);
 
 				leave_station(chef_id, current_recipe, order_num);
+
 				pthread_mutex_lock(&priority_mutex);
 				
 				pthread_mutex_lock(&lor_mutex);
