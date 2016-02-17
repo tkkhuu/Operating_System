@@ -313,10 +313,12 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
 			current_recipe->in_progress = 0;
 			pthread_mutex_unlock(&lor_mutex);
 
+			chef_state[*chef_id - 1] = IDLE;
+
 			pthread_mutex_unlock(&kitchen_mutex[step_finished]);
 			pthread_cond_signal(&kitchen_cond[step_finished]);
 
-			chef_state[*chef_id - 1] = IDLE;
+			
 
 			pthread_mutex_lock(&next_state_mutex);
 			chef_next_state[*chef_id - 1] = IDLE;

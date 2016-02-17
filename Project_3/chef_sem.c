@@ -320,8 +320,9 @@ void leave_station(int *chef_id, recipe *current_recipe, int order_number){
         if (current_recipe->next_action == current_recipe->num_action - 1) {
             current_recipe->is_done = 1;
             current_recipe->in_progress = 0;
-				sem_post(&kitchen[chef_state[*chef_id - 1]]);
 				chef_state[*chef_id - 1] = -1;
+				sem_post(&kitchen[step_finished]);
+				
 				sem_wait(&next_state_mutex);
 				chef_next_state[*chef_id - 1] = -1;
 				sem_post(&next_state_mutex);
