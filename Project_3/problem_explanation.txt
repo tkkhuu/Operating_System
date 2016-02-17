@@ -26,21 +26,59 @@ Then we create a struct to represent an order, each order has:
 
 We create a function that can randomly generate orders from the 5 given recipes.
 
+=================== Mutex & Condition Variable solution  ===================
+
+Implementation1 (This implementation is submitted):
+
+Similarly to the semaphore implementation, we use the same data structure to represent a recipe. We also have 3 different state: enter station, perform and leave station
+
+We therefore have the following global variables: list of orders, states of each chef, a cursor to get the next order on the list.
+
+For each global variable, we create a mutex: 
+- a mutex to control list of orders, 
+- 3 mutexes to control each state of each chef, 
+- the cursor will associate with the list of order so it does not need its own mutex, 
+- and 4 mutexes for 4 stations
+- We also have 4 condition variables for each station
+
+Before a chef enters a station, he needs to check whether the next station is available, if not, wait
+After he makes sure that the next station is available, he must wake up whichever chef is waiting on the current station by sending a pthread_cond_signal.
+
+Implementation2:
+
+We have another design for Mutex and Condition Variable scenario. 
+
+Simulate the order, we create order generator and dispatcher. Order generator is continuously generating orders whereas dispatcher could access common share data queues for dispatch the order to free chefs.
+
+We have 1 queue for order list contains all the recipes, and every recipe generated is a queue contains each tasks.
+
+There are two common shared data can be checked by chefs and dispatcher, that is an array contains 3 recipes that belongs to each chef and a kitchen array contains the work station states. There are 4 mutexes to prevent the random access to kitchen area; 1 mutex to protect kitchen work station states variable; 1 mutex to protect the access to order queue. We also have 4 condition variables to help prevent from busy waiting. 3 for each chef thread and 1 for dispatcher thread. Order generator thread don't need a condition variable because it is always running.
+
+To prevent the deadlock, before each chef move to next work station, they look around to see if the moving going to cause a deadlock. If it will be a deadlock, depends on the lock partners who will potentially form a deadlock as well, chef will chose to go sleep first or signal its follower first to avoid deadlock.
+
+To prevent the starvation, when chef leaving the current work station, if multiple other chef is waiting to enter this work station, the chef will compare the remain time of potential followers' recipes and choose the long remain one to be the next one and signal that chef. This can prevent the starvation.
+
+
+=================== Avoiding deadlocks strategy ===================
+Each chef has his own priority value, which is determined by the number of steps that have been done of the current recipe. For example: Chef 1 is working on recipe 1 step 4, chef 2 is working on recipe 5 step 3, chef 3 is working on recipe 3 step 2. The priority of the chefs will be 4, 3 and 2 accordingly. We have a global variable chef_next_state with an associating mutex/semaphore to determine the next station of each chef. If there is a potential normal dead lock (2 chefs waiting for each other) or potential circle deadlock (3 chefs waiting for each other), the chef with the low priority will drop his order and go to the wait room to get a different order. When a chef is looking for an order, the order that has been dropped will have the higher priority to be picked up first.
+
+=================== Question & Answers  ===================
+
 Questions:
 - In what cases can a deadlock occur? Is there a reliable way to predict a deadlock in advance and avoid
 such scenarios?
-- What is the most fair way to avoid starvation? In what cases is it reasonable to sacrifice perfor-
-mance/parallelism to avoid starvation?
+- What is the most fair way to avoid starvation? In what cases is it reasonable to sacrifice performance/parallelism to avoid starvation?
 
 Answers: 
 - A situation when deadlock happens is when 3 chefs are waiting to enter each other's part of the kitchen. 
   For example chef 1 in stove, chef 2 in oven and chef 3 in sink.
   Chef 1 is waiting to enter oven, chef 2 is waiting to enter sink and chef 3 is waiting to enter stove.
   One way to avoid deadlock is that if it happens, we can drop one of the chefs with his current order to allow the other chef to continue.
-  The droped order will be re-added to the queue to be processed. 
+  The dropped order will be re-added to the queue to be processed. 
+  Sometimes, a chef lock itself will happen as well if mutex is not locking correctly. This is self deadlock.
   
-- The most fairway to avoid starvation if to give a waiting the priority to go first if he has been waiting for more than a value of time.
-- It is reasonable when an order has to be done after it has been waiting for too long, we want to satisfy the customer as well.
+- One fairway to avoid starvation if to give a waiting chef the priority to go first if he has been waiting for more than a value of time, or he has been working on the order for many steps.
+- It is reasonable when an order has to be done after it has been waiting for too long, we don’t want to satisfy the customer as well.
 
 
 

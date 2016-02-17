@@ -10,6 +10,7 @@
 #define N 30 // Number of orders
 #define CHEF_NUM 3
 #define TRUE 1
+#define RANDOM 1
 
 void chef(int *chef_id);
 void enter_station(int *chef_id, recipe *current_recipe, int order_number);
@@ -74,6 +75,10 @@ int main (int argc, char* argv[]){
     srand(time(NULL));
     
     for (init = 0; init < N; init++) {
+        float delay = rand()%32767;
+        if(RANDOM){
+            sleep(delay);
+        }
         int rep_num = (rand() % 5) + 1;
         orders[init] = generate_recipe(rep_num);
         printf("Order number %d is recipe %d\n", init, rep_num);

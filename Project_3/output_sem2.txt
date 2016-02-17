@@ -1,0 +1,1337 @@
+Initializing orders semaphore ...
+Initializing kitchen semaphores ...
+Creating orders ...
+Order number 0 is recipe 4
+Order number 1 is recipe 2
+Order number 2 is recipe 4
+Order number 3 is recipe 2
+Order number 4 is recipe 5
+Order number 5 is recipe 5
+Order number 6 is recipe 4
+Order number 7 is recipe 1
+Order number 8 is recipe 5
+Order number 9 is recipe 5
+Order number 10 is recipe 5
+Order number 11 is recipe 3
+Order number 12 is recipe 1
+Order number 13 is recipe 3
+Order number 14 is recipe 1
+Order number 15 is recipe 4
+Order number 16 is recipe 4
+Order number 17 is recipe 1
+Order number 18 is recipe 2
+Order number 19 is recipe 5
+Order number 20 is recipe 5
+Order number 21 is recipe 5
+Order number 22 is recipe 1
+Order number 23 is recipe 3
+Order number 24 is recipe 3
+Order number 25 is recipe 1
+Order number 26 is recipe 1
+Order number 27 is recipe 5
+Order number 28 is recipe 3
+Order number 29 is recipe 2
+Creating threads ...
+Run threads ...
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 is working on order 1, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Idle, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 is working on order 2, recipe 2
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Prep Area, chef 3: Oven
+Chef 2 is working in station Prep Area
+Chef 3: [Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 0
+Chef 3 is working on order 1, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 2: [Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 0
+Chef 2 is working on order 2, recipe 2
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Stove Top
+Chef 2 released station Prep Area
+Chef 3 released station Oven
+Chef 1: Idle, chef 2: Stove Top, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Stove Top, chef 3: Prep Area
+Chef 1 is working in station Oven
+Chef 1: Oven, chef 2: Stove Top, chef 3: Prep Area
+Chef 2 is working in station Stove Top
+Chef 3: [Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 0
+Chef 3 is working on order 1, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 released station Prep Area
+Chef 1: Oven, chef 2: Stove Top, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 1: [Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 0
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Oven
+Chef 1: Prep Area, chef 2: Stove Top, chef 3: Sink
+Chef 1 is working in station Prep Area
+Chef 2: [Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 0
+Chef 2 is working on order 2, recipe 2
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 3: [Done, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 1
+ ================ Chef 3 finished order 1 recipe 4 ================
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 is working on order 4, recipe 2
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 2 released station Stove Top
+Chef 1: Prep Area, chef 2: Sink, chef 3: Idle
+Chef 2 is working in station Sink
+Chef 1: [Done, Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 1
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 3, released station Prep Area
+Chef 1: Idle, chef 2: Sink, chef 3: Idle
+Chef 1: [Done, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 1
+Chef 1 move onto next order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Sink, chef 3: Idle
+Chef 1 is working in station Oven
+Chef 3 released station Idle
+Chef 1: Oven, chef 2: Sink, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+ ================ Chef 2 finished order 2 recipe 2 ================
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1: [Done, Done, Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 3: [Done, Done, Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 3 is working on order 4, recipe 2
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Stove Top
+Chef 3 released station Prep Area
+Chef 2 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Stove Top
+Chef 2 is working in station Prep Area
+Chef 1: Oven, chef 2: Prep Area, chef 3: Stove Top
+Chef 3 is working in station Stove Top
+Chef 2: [Done, Done, Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 5, released station Prep Area
+Chef 1: Oven, chef 2: Idle, chef 3: Stove Top
+Chef 2: [Done, Done, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 2 move onto next order
+Chef 2 is working on order 6, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1 released station Oven
+Chef 1: Prep Area, chef 2: Idle, chef 3: Stove Top
+Chef 1 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 3 is working on order 4, recipe 2
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 released station Stove Top
+Chef 1: Prep Area, chef 2: Idle, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 1: [Done, Done, Progress, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 3, released station Prep Area
+Chef 1: Idle, chef 2: Idle, chef 3: Sink
+Chef 1: [Done, Done, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 2
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Idle, chef 3: Sink
+Chef 1 is working in station Oven
+Chef 2 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Sink
+Chef 2 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+ ================ Chef 3 finished order 4 recipe 2 ================
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Prep Area, chef 3: Idle
+Chef 1: [Done, Done, Wait, Done, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 move onto next order
+Chef 1 is working on order 7, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Idle
+Chef 1 is working in station Oven
+Chef 2: [Done, Done, Wait, Done, Progress, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 6, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 6, released station Prep Area
+Chef 1: Oven, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 3 released station Idle
+Chef 1: Oven, chef 2: Idle, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 7, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 7, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 move onto next order
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 5, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 5, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 is working on order 9, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 9, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 9, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 is working on order 10, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 10, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 10, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 is working on order 11, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 11, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 11, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 is working on order 12, recipe 3
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 12, recipe 3
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 12, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 move onto next order
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Stove Top
+Chef 3 released station Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Stove Top
+Chef 1 is working in station Prep Area
+Chef 1: Prep Area, chef 2: Oven, chef 3: Stove Top
+Chef 3 is working in station Stove Top
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Stove Top
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 released station Stove Top
+Chef 1 released station Prep Area
+Chef 1: Stove Top, chef 2: Oven, chef 3: Sink
+Chef 1 is working in station Stove Top
+Chef 2 released station Oven
+Chef 1: Stove Top, chef 2: Prep Area, chef 3: Sink
+Chef 2 is working in station Prep Area
+Chef 1: Stove Top, chef 2: Prep Area, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Prep Area
+Chef 1: Stove Top, chef 2: Idle, chef 3: Sink
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Stove Top, chef 2: Oven, chef 3: Sink
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Sink
+Chef 1: Stove Top, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1 released station Stove Top
+Chef 1: Sink, chef 2: Oven, chef 3: Prep Area
+Chef 1 is working in station Sink
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Sink, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is working on order 14, recipe 3
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 3: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Prep Area
+Chef 1: Sink, chef 2: Idle, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2 released station Idle
+Chef 1: Sink, chef 2: Prep Area, chef 3: Oven
+Chef 2 is working in station Prep Area
+Chef 1: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 Circle deadlock detected 
+CIRCLE DEADLOCK: Chef 1 waited too long for station Prep Area, but it has higher priority, so it continues, released station Sink
+Chef 3: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 3 is working on order 13, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 Circle deadlock detected 
+CIRCLE DEADLOCK: Chef 3 waited too long for station Sink, but it has higher priority, so it continues, released station Oven
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 is working on order 14, recipe 3
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 Circle deadlock detected 
+XXXXXXXXXXXX  CIRCLE DEADLOCK, Chef 2 drop order 14, released station Prep Area
+Chef 1: Prep Area, chef 2: Idle, chef 3: Oven
+Chef 1 is working in station Prep Area
+Chef 1: Prep Area, chef 2: Idle, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 1: Prep Area, chef 2: Idle, chef 3: Sink
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 2 move onto next order
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 3
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 released station Prep Area
+Chef 1: Oven, chef 2: Idle, chef 3: Sink
+Chef 1 is working in station Oven
+Chef 2 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Sink
+Chef 2 is working in station Prep Area
+Chef 3: [Done, Done, Wait, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 4
+ ================ Chef 3 finished order 13 recipe 1 ================
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 4
+Chef 1 is working on order 8, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 released station Oven
+Chef 1: Sink, chef 2: Prep Area, chef 3: Idle
+Chef 1 is working in station Sink
+Chef 3 released station Idle
+Chef 1: Sink, chef 2: Prep Area, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 4
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Stove Top
+Chef 2 released station Prep Area
+Chef 1: Sink, chef 2: Stove Top, chef 3: Oven
+Chef 2 is working in station Stove Top
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+ ================ Chef 1 finished order 8 recipe 1 ================
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Stove Top, chef 3: Oven
+Chef 1 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Stove Top, chef 3: Idle
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Idle
+Chef 1: Prep Area, chef 2: Stove Top, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 2 released station Stove Top
+Chef 1: Prep Area, chef 2: Sink, chef 3: Oven
+Chef 2 is working in station Sink
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 5, released station Prep Area
+Chef 1: Idle, chef 2: Sink, chef 3: Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Sink, chef 3: Oven
+Chef 1 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Sink, chef 3: Idle
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 move onto next order
+Chef 3 is working on order 16, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Idle
+Chef 1: Prep Area, chef 2: Sink, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 5, released station Prep Area
+Chef 1: Idle, chef 2: Sink, chef 3: Oven
+Chef 1: [Done, Done, Wait, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 2 released station Sink
+Chef 1: Idle, chef 2: Prep Area, chef 3: Oven
+Chef 2 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 is working on order 16, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 16, released station Oven
+Chef 1: Idle, chef 2: Prep Area, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 move onto next order
+Chef 3 is working on order 17, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Prep Area, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 normal deadlock detected 
+NORMAL DEADLOCK: Chef 2 waited too long for station Oven, but it has higher priority, so it continues, released station Prep Area
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 is working on order 17, recipe 4
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 17, released station Oven
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Idle
+Chef 1 is working in station Oven
+Chef 1: Oven, chef 2: Prep Area, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 move onto next order
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 3 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Prep Area
+Chef 1: [Done, Done, Wait, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 move onto next order
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 2 is working on order 15, recipe 1
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 2 released station Oven
+Chef 1: Idle, chef 2: Sink, chef 3: Prep Area
+Chef 2 is working in station Sink
+Chef 1 released station Idle
+Chef 1: Oven, chef 2: Sink, chef 3: Prep Area
+Chef 1 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 5
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Stove Top
+Chef 3 released station Prep Area
+Chef 1: Oven, chef 2: Sink, chef 3: Stove Top
+Chef 3 is working in station Stove Top
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+ ================ Chef 2 finished order 15 recipe 1 ================
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 released station Idle
+Chef 1: Oven, chef 2: Prep Area, chef 3: Stove Top
+Chef 2 is working in station Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 1 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Prep Area, chef 3: Stove Top
+Chef 1: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 1 move onto next order
+Chef 1 is working on order 19, recipe 2
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 released station Stove Top
+Chef 1: Idle, chef 2: Prep Area, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Sink
+Chef 2 is working in station Oven
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Sink
+Chef 1 is working in station Prep Area
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 1: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 1 is working on order 19, recipe 2
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Stove Top
+Chef 1 released station Prep Area
+Chef 3 released station Sink
+Chef 1: Stove Top, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 2 released station Oven
+Chef 1: Stove Top, chef 2: Sink, chef 3: Prep Area
+Chef 2 is working in station Sink
+Chef 1: Stove Top, chef 2: Sink, chef 3: Prep Area
+Chef 1 is working in station Stove Top
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 released station Prep Area
+Chef 1: Stove Top, chef 2: Sink, chef 3: Oven
+Chef 3 is working in station Oven
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 released station Sink
+Chef 1: Stove Top, chef 2: Prep Area, chef 3: Oven
+Chef 2 is working in station Prep Area
+Chef 1: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 1 is working on order 19, recipe 2
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 released station Stove Top
+Chef 1: Sink, chef 2: Prep Area, chef 3: Oven
+Chef 1 is working in station Sink
+Chef 3: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 3 is working on order 18, recipe 1
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Sink
+Chef 3 Circle deadlock detected 
+CIRCLE DEADLOCK: Chef 3 waited too long for station Sink, but it has higher priority, so it continues, released station Oven
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 2 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 Circle deadlock detected 
+XXXXXXXXXXXX  CIRCLE DEADLOCK, Chef 2 drop order 5, released station Prep Area
+Chef 1: Sink, chef 2: Idle, chef 3: Oven
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 6
+Chef 2 move onto next order
+Chef 2 move onto next order
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Sink
+Chef 3 is working in station Sink
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Progress, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 7
+ ================ Chef 1 finished order 19 recipe 2 ================
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 2 released station Idle
+Chef 1: Idle, chef 2: Oven, chef 3: Sink
+Chef 2 is working in station Oven
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Sink
+Chef 1 is working in station Prep Area
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+ ================ Chef 3 finished order 18 recipe 1 ================
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 6, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 2: [Done, Done, Progress, Done, Progress, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Progress, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 1: [Done, Done, Progress, Done, Progress, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 5, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 move onto next order
+Chef 1 is working on order 20, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 1 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 20, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 20, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 move onto next order
+Chef 1 is working on order 21, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 1 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 21, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 21, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 move onto next order
+Chef 1 is working on order 22, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 1 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 22, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 1 drop order 22, released station Prep Area
+Chef 1: Idle, chef 2: Oven, chef 3: Idle
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 move onto next order
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 1 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 1 is working in station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 1: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Stove Top
+Chef 1 released station Prep Area
+Chef 3 released station Idle
+Chef 1: Stove Top, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: Stove Top, chef 2: Oven, chef 3: Prep Area
+Chef 1 is working in station Stove Top
+Chef 3: [Done, Done, Progress, Done, Wait, Progress, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 is working on order 6, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 6, released station Prep Area
+Chef 1: Stove Top, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 move onto next order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Stove Top, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 released station Stove Top
+Chef 1: Sink, chef 2: Oven, chef 3: Prep Area
+Chef 1 is working in station Sink
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 5, released station Prep Area
+Chef 1: Sink, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 move onto next order
+Chef 3 is getting an order
+Chef 3 checking for dropped order
+Chef 3 found dropped order
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Sink, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 3: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 5, released station Prep Area
+Chef 2 released station Oven
+Chef 1: Sink, chef 2: Prep Area, chef 3: Idle
+Chef 2 is working in station Prep Area
+Chef 1: Sink, chef 2: Prep Area, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 move onto next order
+Chef 3 is working on order 24, recipe 3
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Sink
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Prep Area
+Chef 1 released station Sink
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 1 is working in station Prep Area
+Chef 1: Prep Area, chef 2: Idle, chef 3: Idle
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Prep Area, chef 2: Oven, chef 3: Idle
+Chef 2 is working in station Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Oven
+Chef 1 normal deadlock detected 
+NORMAL DEADLOCK: Chef 1 waited too long for station Oven, but it has higher priority, so it continues, released station Prep Area
+Chef 2: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Oven, chef 2: Idle, chef 3: Idle
+Chef 1 is working in station Oven
+Chef 3 released station Idle
+Chef 1: Oven, chef 2: Idle, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: Oven, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 1 is working on order 23, recipe 1
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Sink
+Chef 1 released station Oven
+Chef 1: Sink, chef 2: Idle, chef 3: Prep Area
+Chef 1 is working in station Sink
+Chef 2 released station Idle
+Chef 1: Sink, chef 2: Oven, chef 3: Prep Area
+Chef 2 is working in station Oven
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Progress, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 is working on order 24, recipe 3
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Oven
+Chef 3 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 3 drop order 24, released station Prep Area
+Chef 1: Sink, chef 2: Oven, chef 3: Idle
+Chef 3: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Progress, Wait, Wait, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 8
+Chef 3 move onto next order
+Chef 3 is working on order 25, recipe 3
+========> #DEBUG enter station: chef 3
+Chef 3 is waiting for Prep Area
+Chef 3 released station Idle
+Chef 1: Sink, chef 2: Oven, chef 3: Prep Area
+Chef 3 is working in station Prep Area
+Chef 1: [Done, Done, Progress, Done, Wait, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 9
+ ================ Chef 1 finished order 23 recipe 1 ================
+Chef 1 is getting an order
+Chef 1 checking for dropped order
+Chef 1 found dropped order
+Chef 1 is working on order 5, recipe 5
+========> #DEBUG enter station: chef 1
+Chef 1 is waiting for Prep Area
+Chef 2: [Done, Done, Progress, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 9
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Prep Area
+Chef 2 normal deadlock detected 
+XXXXXXXXXXXX  NORMAL DEADLOCK, Chef 2 drop order 3, released station Oven
+Chef 1: Idle, chef 2: Idle, chef 3: Prep Area
+Chef 2: [Done, Done, Wait, Done, Progress, Wait, Wait, Done, Wait, Wait, Wait, Wait, Done, Wait, Done, Wait, Wait, Done, Done, Wait, Wait, Wait, Done, Wait, Progress, Wait, Wait, Wait, Wait, Wait, ]
+Orders done: 9
+Chef 2 move onto next order
+Chef 2 is getting an order
+Chef 2 checking for dropped order
+Chef 2 found dropped order
+Chef 2 is working on order 3, recipe 4
+========> #DEBUG enter station: chef 2
+Chef 2 is waiting for Oven
+Chef 2 released station Idle
+Chef 1: Idle, chef 2:
